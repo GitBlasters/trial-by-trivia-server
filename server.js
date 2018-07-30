@@ -18,7 +18,10 @@ client.on('error', err => console.error(err));
 // middleware
 app.use(cors());
 
-
+///need to build out connection to client 
+app.get('*', (request , response) => {
+response.sendFile('index.html', {root:'../trial-by-trivia-client/'})
+}
 
 
 app.listen(PORT, () => console.log(`Port ${PORT} engaged`));
