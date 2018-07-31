@@ -2,13 +2,14 @@
 
 // Dependencies
 const express = require('express');
+const app = express();
 const pg = require('pg');
 const cors = require('cors');
 
 // Setup
 // Tom: This conString variable is setup for use with Windows systems
-const conString = process.env.DATABASE_URL || 'postgres://postgres:1234@localhost:5432/trial_by_trivia';
-const app = express();
+const conString = process.env.DATABASE_URL || 'postgres://postgres:Lookingforwardtothesequel@localhost:5432/trial_by_trivia_db';
+
 const PORT = process.env.PORT || 3000;
 const client = new pg.Client(conString);
 
@@ -17,6 +18,32 @@ client.on('error', err => console.error(err));
 
 // middleware
 app.use(cors());
+
+// Brandon: added get request for table user_data
+app.get('/api/v1/user_data', (request, response) => {
+  let SQL = `
+    SELECT username, score 
+    FROM user_data;
+  `;
+
+  client.query(SQL)
+    .then(result => response.send(result.rows))
+    .catch(console.error);
+});
+
+// Brandon: added post request for table user_data
+app.post('/api/v1/user_data', (request, response) => {
+  let {username, score} = request.body;
+
+  let SQL = `INSERT INTO user_data(username, score) 
+             VALUES($1, $2);`;
+
+  let values = [username, score];
+
+  client.query(SQL, values)
+    .then(() => response.sendStatus(201))
+    .catch(console.error);
+});
 
 ///need to build out connection to client 
 app.get('*', (request , response) => {
