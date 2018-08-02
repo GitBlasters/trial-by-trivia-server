@@ -9,7 +9,7 @@ const pg = require('pg');
 // Setup
 const PORT = process.env.PORT || 3000;
 // Tom: This conString variable is setup for use with Windows systems
-const conString = process.env.DATABASE_URL || 'postgres://postgres:Lookingforwardtothesequel@localhost:5432/trial_by_trivia_db';
+const conString = process.env.DATABASE_URL;
 
 const client = new pg.Client(conString);
 
@@ -44,11 +44,5 @@ app.post('/api/v1/user_data', (request, response) => {
     .then(() => response.sendStatus(201))
     .catch(console.error);
 });
-
-///need to build out connection to client 
-// app.get('*', (request , response) => {
-//   response.sendFile('index.html', {root:'../trial-by-trivia-client/'})
-// });
-
 
 app.listen(PORT, () => console.log(`Port ${PORT} engaged`));
