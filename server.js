@@ -36,13 +36,12 @@ app.get('/api/v1/user_data', (request, response) => {
 });
 
 // Brandon: added post request for table user_data
-app.post('/api/v1/user_data', (request, response) => {
-  let {username, score} = request.body;
+app.post('/api/v1/user_data', express.urlencoded(), (request, response) => {
 
   let SQL = `INSERT INTO user_data(username, score) 
              VALUES($1, $2);`;
 
-  let values = [username, score];
+  let values = [request.body.username, request.body.score];
 
   client.query(SQL, values)
     .then(() => response.sendStatus(201))
