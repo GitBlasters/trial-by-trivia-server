@@ -20,6 +20,8 @@ client.on('error', err => console.error(err));
 // middleware
 app.use(cors());
 
+app.get('/', (req, res) => res.send('Testing, 1, 2, 3'));
+
 // Brandon: added get request for table user_data
 app.get('/api/v1/user_data', (request, response) => {
   let SQL = `
