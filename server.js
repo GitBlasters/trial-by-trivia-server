@@ -9,7 +9,8 @@ const pg = require('pg');
 // Setup
 const PORT = process.env.PORT || 3000;
 // Tom: This conString variable is setup for use with Windows systems
-const conString = process.env.DATABASE_URL;
+// const conString = process.env.DATABASE_URL;
+const conString = 'postgres://fbcavlmjuozzsx:b32626afb2f6b1761bfbd794f7c83b55289530d491062ce9a7205e3f4658c56e@ec2-50-19-86-139.compute-1.amazonaws.com:5432/d5lldu7hfiii9q';
 
 const client = new pg.Client(conString);
 
