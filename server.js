@@ -20,6 +20,7 @@ client.on('error', err => console.error(err));
 // middleware
 app.use(cors());
 
+// this should display when the backend is successfully deployed on Heroku, by selecting the Heroku domain under settings
 app.get('/', (req, res) => res.send('Testing, 1, 2, 3'));
 
 // Brandon: added get request for table user_data
